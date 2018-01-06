@@ -1,11 +1,16 @@
-version: '2'
+version: '3'
 services:
   revealjs:
     build:
       context: docker
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.alpine
+      args:
+        - VCS_REF
+        - BUILD_DATE
+    image: revealjs:1.0.0
     ports:
       - "8000:8000"
       - "35729:35729"
     volumes:
       - ./slides:/revealjs/slides:ro
+      - ./revealjs-files:/revealjs-files:ro
